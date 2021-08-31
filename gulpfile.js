@@ -2,15 +2,14 @@ const gulp = require('gulp'),
   browserSync = require('browser-sync').create(),
   pug = require('gulp-pug'),
   sass = require('gulp-sass')(require('sass')),
-  concat = require('gulp-concat');
+  concat = require('gulp-concat'),
+  svgSprite = require('gulp-svg-sprite');
 const del = require('del');
 const { src, dest } = require('gulp');
 
 // const sourcemaps = require('gulp-sourcemaps');
-
 // const autoprefixer = require('gulp-autoprefixer');
-// const svgSprite = require('gulp-svg-sprite');
-// const imagemin = require('gulp-imagemin');
+
 
 const app = 'app/',
   dist = 'build/';
@@ -36,6 +35,15 @@ const config = {
   }
 }
 
+const configSvg = {
+  mode: {
+    stack: {
+      sprite: "../sprite.svg"
+    }
+  }
+};
+
+
 const cleanDist = () => del('build/**/*', { force: true });
 
 const scripts = () => {
@@ -46,6 +54,21 @@ const scripts = () => {
   ])
     .pipe(dest('./build/js/'))
 };
+
+const copyImg = () => {
+  return src([
+    './app/images/*.*',
+  ])
+    .pipe(dest('./build/images/'))
+};
+
+const svg2sprite = () => {
+  return src([
+    './app/images/icons/*.svg'
+  ])
+    .pipe(svgSprite(configSvg))
+    .pipe(dest('./build/images/icons/'))
+}
 
 const webServer = () => {
   browserSync.init({
@@ -81,7 +104,7 @@ const watchFiles = () => {
   gulp.watch([config.watch.style], gulp.series(scssTask))
 }
 
-const start = gulp.series(cleanDist, pugTask, scssTask, scripts);
+const start = gulp.series(cleanDist, pugTask, scssTask, scripts, copyImg, svg2sprite);
 
 exports.default = gulp.parallel(start, watchFiles, webServer);
 
