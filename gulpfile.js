@@ -10,7 +10,6 @@ const { src, dest } = require('gulp');
 // const sourcemaps = require('gulp-sourcemaps');
 // const autoprefixer = require('gulp-autoprefixer');
 
-
 const app = 'app/',
   dist = 'build/';
 
@@ -73,9 +72,10 @@ const svg2sprite = () => {
 const webServer = () => {
   browserSync.init({
     server: {
-      baseDir: dist
+      baseDir: "./build",
+      index: "/index.html"
     },
-    port: 3000,
+    port: 3001,
     host: 'localhost',
     notify: false
   })
@@ -107,6 +107,3 @@ const watchFiles = () => {
 const start = gulp.series(cleanDist, pugTask, scssTask, scripts, copyImg, svg2sprite);
 
 exports.default = gulp.parallel(start, watchFiles, webServer);
-
-// exports.default = series(parallel(buildSvg, buildImages));
-
