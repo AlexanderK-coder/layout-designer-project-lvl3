@@ -15,3 +15,35 @@ $theme-colors: (
 @function theme-color($key: "primary") {
   @return map-get($theme-colors, $key);
 }
+
+// $grid-gutter-width: 3rem;
+
+// $grid-breakpoints: (
+//   xs: 0,
+//   sm: 576px,
+//   md: 768px,
+//   lg: 992px,
+//   xl: 1200px,
+//   xxl: 1600px,
+// );
+
+// $container-max-widths: (
+//   xxl: 1540px,
+// );
+
+// $spacer: 1rem;
+
+// $spacers: (
+//   5: (
+//     $spacer * 2,
+//   ),
+//   6: (
+//     $spacer * 2.5,
+//   ),
+//   7: (
+//     $spacer * 3,
+//   ),
+//   8: (
+//     $spacer * 4.5,
+//   ),
+// );
