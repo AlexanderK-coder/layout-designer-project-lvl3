@@ -12,38 +12,73 @@ $theme-colors: (
   "gray": #efefef,
 );
 
-@function theme-color($key: "primary") {
-  @return map-get($theme-colors, $key);
+// Здесь была функция выбора цвета
+
+$enable-shadows: true;
+$enable-negative-margins: true;
+
+$container-max-widths: (
+  xxl: 1540px,
+);
+
+$grid-gutter-width: 3rem;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1600px,
+);
+
+$rem-base: 16px;
+
+@function px-to-rem($list) {
+  $result: ();
+
+  @each $value in $list {
+    $result: append($result, (($value / $rem-base) * 1rem));
+  }
+
+  @return #{$result};
 }
 
-// $grid-gutter-width: 3rem;
+$spacer: 1rem;
 
-// $grid-breakpoints: (
-//   xs: 0,
-//   sm: 576px,
-//   md: 768px,
-//   lg: 992px,
-//   xl: 1200px,
-//   xxl: 1600px,
-// );
-
-// $container-max-widths: (
-//   xxl: 1540px,
-// );
-
-// $spacer: 1rem;
-
-// $spacers: (
-//   5: (
-//     $spacer * 2,
-//   ),
-//   6: (
-//     $spacer * 2.5,
-//   ),
-//   7: (
-//     $spacer * 3,
-//   ),
-//   8: (
-//     $spacer * 4.5,
-//   ),
-// );
+$spacers: (
+  0: 0,
+  1: (
+    $spacer * 0.25,
+  ),
+  2: (
+    $spacer * 0.5,
+  ),
+  3: (
+    $spacer * 1,
+  ),
+  4: (
+    $spacer * 1.5,
+  ),
+  5: (
+    $spacer * 2,
+  ),
+  6: (
+    $spacer * 2.5,
+  ),
+  7: (
+    $spacer * 3,
+  ),
+  8: (
+    $spacer * 4.5,
+  ),
+  9: (
+    $spacer * 5,
+  ),
+  10: (
+    $spacer * 5.5,
+  ),
+  11: (
+    $spacer * 6,
+  ),
+);
